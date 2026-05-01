@@ -1,9 +1,11 @@
 package pl.kul.inpost_assessment;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import pl.kul.inpost_assessment.service.ParcelLockerService;
 
 import java.net.http.HttpClient;
 import java.util.concurrent.Executors;
@@ -22,5 +24,13 @@ public class InpostAssessmentApplication {
                 .version(HttpClient.Version.HTTP_2)
                 .executor(Executors.newVirtualThreadPerTaskExecutor())
                 .build();
+    }
+
+    @Bean
+    public CommandLineRunner run(ParcelLockerService parcelLockerService) {
+        return args -> {
+            parcelLockerService.getNearbyLockers(51.43560, 21.14700)
+                    .forEach(System.out::println);
+        };
     }
 }
