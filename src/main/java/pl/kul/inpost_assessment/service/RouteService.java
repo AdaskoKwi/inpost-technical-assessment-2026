@@ -45,6 +45,11 @@ public class RouteService {
     public List<ParcelLocker> getRoute(ParcelLocker startingPoint, List<ParcelLocker> lockers) {
         ParcelLocker nearestLocker = new ParcelLocker();
         double minDistance = Double.MAX_VALUE;
+
+        if (route.isEmpty() && lockers.isEmpty()) {
+            return List.of();
+        }
+
         route.add(startingPoint);
 
         if (route.size() == 10 || lockers.isEmpty()) {
