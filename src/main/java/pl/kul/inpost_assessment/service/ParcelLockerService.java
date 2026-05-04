@@ -25,8 +25,8 @@ public class ParcelLockerService {
     }
 
     public List<ParcelLocker> getNearbyLockers(double latitude, double longitude) {
-        double longitudeRange = 0.05;
-        double latitudeRange = 0.05;
+        double longitudeRange = 0.02;
+        double latitudeRange = 0.02;
 
         List<ParcelLocker> nearbyLockers = getAll().stream()
                 .filter(locker -> Math.abs(locker.getLatitude() - latitude) <= latitudeRange)

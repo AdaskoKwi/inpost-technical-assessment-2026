@@ -5,9 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import pl.kul.inpost_assessment.model.parcelLocker.ParcelLocker;
 import pl.kul.inpost_assessment.service.ParcelLockerService;
+import pl.kul.inpost_assessment.service.RouteService;
 
 import java.net.http.HttpClient;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 @SpringBootApplication
@@ -27,10 +31,18 @@ public class InpostAssessmentApplication {
     }
 
     @Bean
-    public CommandLineRunner run(ParcelLockerService parcelLockerService) {
+    public CommandLineRunner run(ParcelLockerService parcelLockerService, RouteService routeService) {
         return args -> {
-            parcelLockerService.getNearbyLockers(51.43560, 21.14700)
-                    .forEach(System.out::println);
+            ParcelLocker startingPoint = ParcelLocker.builder()
+                    .latitude(51.43560)
+                    .longitude(21.14700)
+                    .build();
+
+            List<ParcelLocker> lockers = parcelLockerService.getNearbyLockers(startingPoint.getLatitude(), startingPoint.getLongitude());
+
+            List<ParcelLocker> newLockers = new ArrayList<>(lockers);
+
+            System.out.println(routeService.getRouteLink(routeService.getRoute(startingPoint, newLockers)));
         };
     }
 }
