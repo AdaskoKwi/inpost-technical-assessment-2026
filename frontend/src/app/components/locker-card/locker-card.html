@@ -2,14 +2,14 @@
     <div class="locker-card">
         <div class="locker-card-address-info">
             <div class="row-address">
-                <p>{{locker.address.city}}, {{locker.address.postCode}}, {{locker.address.street}} {{locker.address.buildingNumber}}</p>
+                <p><b>{{locker.address.city}}, {{locker.address.postCode}}, {{locker.address.street}} {{locker.address.buildingNumber}}</b></p>
             </div>
             <div class="row-location-description">
                 <p>{{locker.locationDescription}}</p>
             </div>
         </div>
         <div class="locker-card-button">
-            <button class="remove-locker-button">X</button>
+            <button class="remove-locker-button" (click)="handleDelete()">X</button>
         </div>
     </div>
 </div>

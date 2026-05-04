@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LockerCard} from '../locker-card/locker-card';
 import {ParcelLocker} from '../../model/ParcelLocker';
 
@@ -12,23 +12,8 @@ import {ParcelLocker} from '../../model/ParcelLocker';
 })
 export class LockerSelection {
     @Input() selectedLockers: ParcelLocker[] = [];
+    @Output() deleteLocker = new EventEmitter<string>();
 
     constructor() {
-    }
-
-    locker: ParcelLocker = {
-        name: 'test',
-        locationDescription: 'Przy galerii Plaza',
-        country: "PL",
-        status: "Operating",
-        longitude: 51.23453,
-        latitude: 23.41345,
-        address: {
-            city: 'Lublin',
-            province: 'lubelskie',
-            postCode: '26-600',
-            street: 'Lipowa',
-            buildingNumber: '13'
-        }
     }
 }

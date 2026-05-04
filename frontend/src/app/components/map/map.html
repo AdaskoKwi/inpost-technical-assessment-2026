@@ -1,4 +1,7 @@
 <div class="map-wrapper">
     <div id="map"></div>
-    <app-locker-selection/>
+    <app-locker-selection
+        [selectedLockers]="selectedLockers()"
+        (deleteLocker)="removeItem($event)"
+    />
 </div>

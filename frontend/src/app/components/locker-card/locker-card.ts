@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ParcelLocker} from '../../model/ParcelLocker';
 
 @Component({
@@ -9,4 +9,10 @@ import {ParcelLocker} from '../../model/ParcelLocker';
 })
 export class LockerCard {
     @Input() locker!: ParcelLocker;
+
+    @Output() deleteLocker = new EventEmitter<string>();
+
+    handleDelete() {
+        this.deleteLocker.emit(this.locker.name)
+    }
 }
