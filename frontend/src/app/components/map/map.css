@@ -1,0 +1,10 @@
+.map-wrapper {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#map {
+    height: 60vh;
+    width: 70%;
+}
