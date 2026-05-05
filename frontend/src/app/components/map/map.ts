@@ -6,6 +6,7 @@ import {ParcelLocker} from '../../model/ParcelLocker';
 import {LockerService} from '../../services/lockers/locker-service';
 import {RouteService} from '../../services/route/route-service';
 import {StartingPoint} from '../../model/StartingPoint';
+import {LinkPopup} from '../link-popup/link-popup/link-popup';
 
 const iconRetinaUrl = 'marker-icon.png';
 const iconUrl = 'marker-icon-2x.png';
@@ -26,6 +27,7 @@ L.Marker.prototype.options.icon = defaultIcon;
   selector: 'app-map',
     imports: [
         LockerSelection,
+        LinkPopup,
     ],
   templateUrl: './map.html',
   styleUrl: './map.css',
@@ -40,6 +42,10 @@ export class Map implements AfterViewInit {
 
     nearbyLockers = signal<ParcelLocker[]>([]);
     selectedLockers = signal<ParcelLocker[]>([]);
+
+    isPopupOpen = signal<boolean>(false)
+    popupMessage = signal<string>("");
+
     routeLink = signal<string>('');
 
     constructor() {
@@ -83,10 +89,18 @@ export class Map implements AfterViewInit {
         });
     }
 
+    handleRouteLink() {
+        if (this.selectedLockers().length > 1) {
+            this.getRouteLink();
+        } else {
+            this.setPopupData(true, "Wybierz co najmniej 2 paczkomaty");
+        }
+    }
+
     getRouteLink() {
         this.routeService.getRouteLink(this.startingPoint, this.selectedLockers()).subscribe(link => {
             this.routeLink.set(link);
-            console.log(link);
+            this.setPopupData(true, link);
         })
     }
 
@@ -129,5 +143,10 @@ export class Map implements AfterViewInit {
             console.log(this.nearbyLockers)
             this.updateMarkersOnMap(this.nearbyLockers());
         });
+    }
+
+    private setPopupData(isOpen: boolean, link: string) {
+        this.isPopupOpen.set(isOpen);
+        this.popupMessage.set(link);
     }
 }

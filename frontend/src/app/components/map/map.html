@@ -1,10 +1,16 @@
 <div class="map-wrapper">
     <div class="map-and-function-container">
         <div id="map"></div>
-        <button class="route-button" (click)="getRouteLink()">Pobierz Ścieżkę</button>
+        <button class="route-button" (click)="handleRouteLink()">Pobierz Ścieżkę</button>
     </div>
     <app-locker-selection
         [selectedLockers]="selectedLockers()"
         (deleteLocker)="removeItem($event)"
+    />
+
+    <app-link-popup
+        [(isOpen)]="isPopupOpen"
+        [link]="popupMessage()"
+        title="Link do Map Google"
     />
 </div>
