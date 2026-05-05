@@ -4,6 +4,8 @@ import {GeolocationService} from '../../services/geolocation/geolocation.service
 import {LockerSelection} from '../locker-selection/locker-selection';
 import {ParcelLocker} from '../../model/ParcelLocker';
 import {LockerService} from '../../services/lockers/locker-service';
+import {RouteService} from '../../services/route/route-service';
+import {StartingPoint} from '../../model/StartingPoint';
 
 const iconRetinaUrl = 'marker-icon.png';
 const iconUrl = 'marker-icon-2x.png';
@@ -33,9 +35,12 @@ export class Map implements AfterViewInit {
     private leafletMarkers: L.Marker[] = [];
     private geolocationService: GeolocationService = inject(GeolocationService);
     private lockerService: LockerService = inject(LockerService);
+    private routeService: RouteService = inject(RouteService);
+    private startingPoint: StartingPoint = {latitude: 0, longitude: 0};
 
     nearbyLockers = signal<ParcelLocker[]>([]);
     selectedLockers = signal<ParcelLocker[]>([]);
+    routeLink = signal<string>('');
 
     constructor() {
     }
@@ -78,6 +83,13 @@ export class Map implements AfterViewInit {
         });
     }
 
+    getRouteLink() {
+        this.routeService.getRouteLink(this.startingPoint, this.selectedLockers()).subscribe(link => {
+            this.routeLink.set(link);
+            console.log(link);
+        })
+    }
+
     removeItem(nameToRemove: string) {
         this.selectedLockers.update(currentList =>
             currentList.filter(item => item.name !== nameToRemove)
@@ -85,7 +97,7 @@ export class Map implements AfterViewInit {
     }
 
     private handleLockerSelection(locker: ParcelLocker): void {
-        if (this.selectedLockers().length < 9) {
+        if (this.selectedLockers().length < 9 && !this.selectedLockers().includes(locker)) {
             this.selectedLockers.update(currentList => [...currentList, locker])
         }
     }
@@ -95,6 +107,9 @@ export class Map implements AfterViewInit {
             next: (coords) => {
                 const lat = coords.latitude;
                 const lng = coords.longitude;
+
+                this.startingPoint.latitude = lat;
+                this.startingPoint.longitude = lng;
 
                 this.centerOnUserLocation(lat, lng);
                 this.loadLockers(lat, lng)

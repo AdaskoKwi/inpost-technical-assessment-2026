@@ -1,5 +1,8 @@
 <div class="map-wrapper">
-    <div id="map"></div>
+    <div class="map-and-function-container">
+        <div id="map"></div>
+        <button class="route-button" (click)="getRouteLink()">Pobierz Ścieżkę</button>
+    </div>
     <app-locker-selection
         [selectedLockers]="selectedLockers()"
         (deleteLocker)="removeItem($event)"
