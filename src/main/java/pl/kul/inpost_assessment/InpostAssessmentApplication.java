@@ -35,7 +35,10 @@ public class InpostAssessmentApplication {
             List<ParcelLocker> lockers = lockerService.getAll();
 
             if (lockers.isEmpty()) {
+                System.out.println("To się wykonało");
                 apiClient.fetchParcelLockers();
+            } else {
+                System.out.println("To się nie wykonało");
             }
         };
     }
