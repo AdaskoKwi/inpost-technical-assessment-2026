@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: inpost-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: inpostdb
+      POSTGRES_USER: springuser
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    user: "999:999"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U springuser -d inpostdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: .
+    container_name: inpost-springboot
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/inpostdb
+      SPRING_DATASOURCE_USERNAME: springuser
+      SPRING_DATASOURCE_PASSWORD: secret
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    container_name: inpost-angular
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+
+volumes:
+  pgdata:
