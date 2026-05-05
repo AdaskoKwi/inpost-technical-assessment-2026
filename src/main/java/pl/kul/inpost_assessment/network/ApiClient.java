@@ -67,8 +67,8 @@ public class ApiClient {
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
                 .thenRun(() -> {
                     Long finish = System.currentTimeMillis();
-                    System.out.println("Przetworzono " + futures.size() + " stron");
-                    System.out.println("Zajęło to " + (double)(finish - start) / 1000.0 + " sekund");
+                    System.out.println("ApiClient: Przetworzono " + futures.size() + " stron");
+                    System.out.println("ApiClient: Zajęło to " + (double)(finish - start) / 1000.0 + " sekund");
                 })
                 .join();
     }

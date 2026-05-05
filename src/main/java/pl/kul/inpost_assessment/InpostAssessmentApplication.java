@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import pl.kul.inpost_assessment.network.ApiClient;
-import pl.kul.inpost_assessment.service.ParcelLockerService;
 
 import java.net.http.HttpClient;
 import java.util.concurrent.Executors;
@@ -28,13 +27,10 @@ public class InpostAssessmentApplication {
     }
 
     @Bean
-    public CommandLineRunner run(ParcelLockerService lockerService, ApiClient apiClient) {
+    public CommandLineRunner run(ApiClient apiClient) {
         return args -> {
-            long lockerCount = lockerService.getCount();
-
-            if (lockerCount == 0) {
-                apiClient.fetchParcelLockers();
-            }
+            System.out.println("WAIT FOR API CLIENT TO FINISH FETCHING DATA!!");
+            apiClient.fetchParcelLockers();
         };
     }
 }
