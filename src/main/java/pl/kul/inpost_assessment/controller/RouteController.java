@@ -20,8 +20,8 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @PostMapping("/analyze")
-    public ResponseEntity<List<ParcelLocker>> getRoute(@RequestBody RouteRequestDTO dto) {
+    @PostMapping("/link")
+    public ResponseEntity<String> getRoute(@RequestBody RouteRequestDTO dto) {
         ParcelLocker startingPoint = ParcelLocker
                 .builder()
                 .latitude(dto.startingPoint().latitude())
@@ -29,8 +29,8 @@ public class RouteController {
                 .build();
         List<ParcelLocker> points = new ArrayList<>(dto.points());
 
-        List<ParcelLocker> route = routeService.getRoute(startingPoint, points);
+        String routeLink = routeService.getRouteLink(startingPoint, points);
 
-        return ResponseEntity.ok(route);
+        return ResponseEntity.ok(routeLink);
     }
 }
