@@ -1,0 +1,13 @@
+@if (isOpen()) {
+    <div class="popup-overlay" (click)="isOpen.set(false)">
+        <div class="popup-card" (click)="$event.stopPropagation()">
+            <h3>{{title()}}</h3>
+            @if (link().startsWith('https')) {
+                <a href="{{link()}}"><p>Link do Map Google z trasą</p></a>
+            } @else {
+                <p>{{link()}}</p>
+            }
+            <button (click)="isOpen.set(false)">OK</button>
+        </div>
+    </div>
+}

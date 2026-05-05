@@ -1,0 +1,15 @@
+.locker-selection-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 2px solid hsl(44, 92%, 50%);
+    border-radius: 1vh;
+    padding: 0.2rem 0.5rem;
+
+    p {
+        width: 21rem;
+        text-align: center;
+    }
+}

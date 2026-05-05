@@ -1,0 +1,42 @@
+.map-wrapper {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    column-gap: 1rem;
+}
+
+.map-and-function-container {
+    display: flex;
+    position: sticky;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60vw;
+    row-gap: 2rem;
+}
+
+.route-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: hsl(38, 94%, 60%);
+    transition: .2s ease;
+}
+
+.route-button:hover {
+    cursor: pointer;
+    border-radius: 50px;
+    background: hsl(38, 94%, 50%);
+}
+
+#map {
+    height: 60vh;
+    width: 100%;
+}

@@ -1,0 +1,9 @@
+<div class="locker-selection-wrapper">
+    @if (selectedLockers.length === 0) {
+        <p>Wybierz paczkomaty</p>
+    } @else {
+        @for (locker of selectedLockers; track $index) {
+            <app-locker-card [locker]="locker" (deleteLocker)="deleteLocker.emit($event)"/>
+        }
+    }
+</div>

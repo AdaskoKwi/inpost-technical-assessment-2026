@@ -1,0 +1,56 @@
+.locker-card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem;
+}
+
+.locker-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 18rem;
+    column-gap: 0.5rem;
+    border: 3px solid #F7A008;
+    border-radius: 1.5rem;
+    box-shadow: 0 0 4px 3px hsl(0, 0%, 80%);
+    padding: 0.45rem 1rem;
+    transition: .2s ease-in-out;
+}
+
+.locker-card-address-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-address, .row-location-description {
+    width: 100%;
+    p {
+        width: 100%;
+        font-size: 0.8rem;
+        text-align: left;
+    }
+}
+
+.remove-locker-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    outline: none;
+    border: 2px solid #F7A008;
+    border-radius: 20px;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: .2s ease;
+}
+
+.remove-locker-button:hover {
+    cursor: pointer;
+    border: 2px solid hsl(38, 94%, 40%);
+    background: hsl(0, 0%, 83%, 0.7);
+    transition: .2s ease;
+}

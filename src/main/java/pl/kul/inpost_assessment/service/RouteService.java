@@ -13,10 +13,10 @@ public class RouteService {
     public RouteService() {
     }
 
-    public String getRouteLink(List<ParcelLocker> route) {
-        String baseUrl = "https://www.google.com/maps/dir/?api=1";
+    public String getRouteLink(ParcelLocker startingPoint, List<ParcelLocker> lockers) {
+        List<ParcelLocker> route = getRoute(startingPoint, lockers);
 
-        route.forEach(System.out::println);
+        String baseUrl = "https://www.google.com/maps/dir/?api=1";
 
         String origin = getCoordinates(route.getFirst());
         String destination = getCoordinates(route.getLast());
