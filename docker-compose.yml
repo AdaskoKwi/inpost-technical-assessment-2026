@@ -28,7 +28,7 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/inpostdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://inpost-postgres:5432/inpostdb
       SPRING_DATASOURCE_USERNAME: springuser
       SPRING_DATASOURCE_PASSWORD: secret
     ports:
