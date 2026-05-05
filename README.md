@@ -31,7 +31,7 @@ This can be changed quickly inside the code, but I decided to leave it as is bec
 interested in the lockers nearby to me. The app features scheduled tasks with CRON which update 
 the database contents every hour to ensure up-to-date data was served to users. To download data 
 from the points API I created an ApiClient class with some features from the concurrency API to 
-fetch the data faster, whole process takes about 2 minutes.
+fetch the data faster, whole process takes about 2.5 minutes.
 
 #### Landing page
 ![main_app_page](/screenshots/main-page.png)
@@ -77,9 +77,11 @@ Tools:
 # Building the whole app:
  git clone https://github.com/AdaskoKwi/inpost-technical-assessment-2026.git
  cd inpost-technical-assessment-2026/
- docker-compose up -d --build
+ docker-compose up --build
 ```
 
+Wait around 2.5 - 3 minutes for the app to fetch points data from InPost API. 
+When that happens a message saying so will appear in the terminal.
 After that go to ```http://localhost:4200/``` in your browser to open the web app. 
 
 ## What I would do with more time
@@ -97,4 +99,4 @@ and to get a lot of help with containerization.
 ## Anything else?
 
 Updating the data contained in the database happens every hour because I found it to be a good interval of time
-for having latest data with the amount of time it took to read the API which was about 2 minutes.
+for having latest data with the amount of time it took to read the API which was about 2.5 minutes.
