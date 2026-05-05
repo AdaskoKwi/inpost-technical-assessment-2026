@@ -24,6 +24,10 @@ public class ParcelLockerService {
         return parcelLockerRepository.findAll();
     }
 
+    public long getCount() {
+        return parcelLockerRepository.count();
+    }
+
     public List<ParcelLocker> getNearbyLockers(double latitude, double longitude) {
         // 0.01 ~ 1,11km, 0,05 ~ 5,55km
         double longitudeRange = 0.05;
